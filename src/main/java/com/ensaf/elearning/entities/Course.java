@@ -37,6 +37,10 @@ public class Course implements Serializable {
    @ManyToMany
    private Collection<Student>  students;
 
+   @OneToMany(mappedBy = "course",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+
+   private Collection<Section> sections;
+
 
 
 
