@@ -2,7 +2,8 @@ package com.ensaf.elearning.entities;
 
 import lombok.*;
 
-import java.io.Serializable;
+import javax.persistence.Entity;
+
 
 @Data
 @AllArgsConstructor
@@ -10,18 +11,10 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
-public class Admin  implements Serializable {
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String userName;
-    private int age;
-    private String city;
-    private String country;
-    private String gender;
+@Entity
+public class Admin extends Person {
 
-    private boolean isSuperAdmin;
+
+    private boolean issuperadmin;
 
 }

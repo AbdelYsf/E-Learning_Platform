@@ -2,7 +2,9 @@ package com.ensaf.elearning.entities;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -10,18 +12,13 @@ import java.io.Serializable;
 @ToString
 @Getter
 @Setter
-public class Instructor  implements Serializable {
+@Entity
+public class Instructor  extends Person{
 
-    private Long id;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phoneNumber;
-    private String userName;
-    private int age;
-    private String city;
-    private String country;
-    private String gender;
+
     private String speciality;
     private String bio;
+
+    @OneToMany(mappedBy = "instructor",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Collection<Course> courses;
 }
