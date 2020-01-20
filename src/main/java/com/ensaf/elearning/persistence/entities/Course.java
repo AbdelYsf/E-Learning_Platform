@@ -1,5 +1,5 @@
 
-package com.ensaf.elearning.entities;
+package com.ensaf.elearning.persistence.entities;
 
 import lombok.*;
 

@@ -1,6 +1,6 @@
-package com.ensaf.elearning.repositories;
+package com.ensaf.elearning.persistence.repositories;
 
-import com.ensaf.elearning.entities.Person;
+import com.ensaf.elearning.persistence.entities.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 

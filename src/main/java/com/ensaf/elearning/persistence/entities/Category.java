@@ -1,11 +1,10 @@
-package com.ensaf.elearning.entities;
+package com.ensaf.elearning.persistence.entities;
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
