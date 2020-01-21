@@ -9,10 +9,10 @@ import java.util.HashMap;
 @Controller
 public class HomeController  {
 
-   /* @GetMapping("/login")
+    @GetMapping("/login")
     public ModelAndView login(){
             String viewName= "login.html";
 
             return  new ModelAndView(viewName,new HashMap<>());
-    }*/
+    }
 }

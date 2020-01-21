@@ -14,9 +14,9 @@ import java.util.Collection;
 @Entity
 public class Student  extends Person {
 
-    private String cne;
-    private String major;
-    private String lastobtaineddegree;
+    public String cne;
+    public String major;
+    public String lastobtaineddegree;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_taken_courses",
