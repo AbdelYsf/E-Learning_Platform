@@ -20,7 +20,7 @@ public class Student  extends Person {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_taken_courses",
-            joinColumns = @JoinColumn(name = "studnt_id",referencedColumnName = "id"),
+            joinColumns = @JoinColumn(name = "student_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "course_id",referencedColumnName = "id"))
     private Collection<Course> takencourses;
 

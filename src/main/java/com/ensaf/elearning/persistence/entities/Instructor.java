@@ -15,8 +15,8 @@ import java.util.Collection;
 public class Instructor  extends Person{
 
 
-    private String speciality;
-    private String bio;
+    public String speciality;
+    public String bio;
 
     @OneToMany(mappedBy = "instructor",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Collection<Course> courses;

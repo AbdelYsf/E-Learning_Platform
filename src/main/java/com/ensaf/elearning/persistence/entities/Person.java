@@ -14,16 +14,16 @@ public abstract class Person implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    private Long id;
-    private String firstname;
-    private String lastname;
-    private String email;
-    private String phonenumber;
-    private String username;
-    private int age;
-    private String city;
-    private String country;
-    private String gender;
+    public Long id;
+    public String firstname;
+    public String lastname;
+    public String email;
+    public String phonenumber;
+    public String username;
+    public int age;
+    public String city;
+    public String country;
+    public String gender;
 
     @Temporal(TemporalType.DATE)
     private Date deteofinscreption;
