@@ -19,12 +19,12 @@ public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String title;
-    private String description;
-    private String prerequisites;
-    private String level;
-    private String estimatedTime;
+    public Integer id;
+    public String title;
+    public String description;
+    public String prerequisites;
+    public String level;
+    public String estimatedTime;
 
    @ManyToOne
     @JoinColumn(name="categoy_id")
