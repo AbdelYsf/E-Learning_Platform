@@ -1,53 +1,38 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="../static/css/main.css" />
 
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Learing</title>
-
-</head>
+<head th:replace="layout :: head('explore')"></head>
 
 <body class="grey lighten-4">
-<nav class="blue darken-2">
-    <div class="container">
-        <div class="nav-wrapper">
-            <a href="index.html" class="brand-logo">E-Learing</a>
-        </div>
-    </div>
-</nav>
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: flash"></div>
 <section class="section section-login">
     <div class="container">
         <div class="row">
-            <div class="col s12 m8 offset-m2 l6 offset-l3">
-                <div class="card-panel login blue darken-2 white-text center">
-                    <h2>Register</h2>
+            <div class="col s12 m8 offset-m2 l8 offset-l2">
+                <div class="card-panel login blue-text center">
+                    <h5>adding a course</h5>
                     <form th:action="@{AddCourse}" method="post" th:object="${course}">
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{title}" id="title">
-                            <label class="white-text" for="title">Course Title</label>
+                            <label class="blue-text" for="title">Course Title</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{level}" id="level">
-                            <label class="white-text" for="level">Course Level</label>
+                            <label class="blue-text" for="level">Course Level</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{prerequisites}" id="prerequisites">
-                            <label class="white-text" for="prerequisites">Prerequisites</label>
+                            <label class="blue-text" for="prerequisites">Prerequisites</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">phone</i>
                             <input type="text" th:field="*{estimatedTime}" id="estimatedTime">
-                            <label class="white-text" for="estimatedTime">Estimated Time</label>
+                            <label class="blue-text" for="estimatedTime">Estimated Time</label>
                         </div>
 
                         <input type="submit" value="Create" class="btn btn-large btn-extended grey lighten-4 black-text">
@@ -58,49 +43,15 @@
     </div>
 </section>
 
-
 <!-- Footer -->
-<footer class="section blue darken-2 white-text center">
-    <p>E-Learing Copyright &copy; 2020</p>
-</footer>
 
+<div th:replace="layout :: footer"></div>
 
 
 <!-- Preloader -->
-<div class="loader preloader-wrapper big active">
-    <div class="spinner-layer spinner-blue-only">
-        <div class="circle-clipper left">
-            <div class="circle"></div>
-        </div>
-        <div class="gap-patch">
-            <div class="circle"></div>
-        </div>
-        <div class="circle-clipper right">
-            <div class="circle"></div>
-        </div>
-    </div>
-</div>
+<div th:replace="layout :: preload"></div>
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="../static/js/materialize.min.js"></script>
-
-<script>
-
-    // Hide Sections
-    $('.section').hide();
-
-    setTimeout(function () {
-        $(document).ready(function () {
-            // Show sections
-            $('.section').fadeIn();
-
-            // Hide preloader
-            $('.loader').fadeOut();
-
-        });
-    }, 1000);
-</script>
+<div th:replace="layout :: scripts"></div>
 </body>
 
 </html>

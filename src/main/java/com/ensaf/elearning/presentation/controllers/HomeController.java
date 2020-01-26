@@ -7,12 +7,11 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 
 @Controller
-public class HomeController  {
+public class HomeController{
 
     @GetMapping("/login")
     public ModelAndView login(){
-            String viewName= "login.html";
-
+            String viewName= "login";
             return  new ModelAndView(viewName,new HashMap<>());
     }
 }

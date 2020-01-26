@@ -11,24 +11,30 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/Course")
+@RequestMapping(value = "/courses")
 public class CourseController {
+
     @Autowired
     private ICourseDAO courseDAO;
-    @RequestMapping(value = "/Index")
+
+    @RequestMapping(value = "/index")
     public String Index(Model model){
         List<Course> crs=courseDAO.findAll();
         model.addAttribute("Courses",crs);
         return "Courses";
     }
-    @RequestMapping(value = "/Create",method = RequestMethod.GET)
+
+    @RequestMapping(value = "/create",method = RequestMethod.GET)
     public String Create(Model model){
         model.addAttribute("course",new Course());
         return "CreateCourse";
     }
+
     @RequestMapping(value = "/AddCourse",method = RequestMethod.POST)
     public String Add(Course course){
         courseDAO.save(course);
         return "redirect:/Course/Index";
     }
+
+
 }

@@ -1,103 +1,87 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="../static/css/materialize.min.css" media="screen,projection" />
-    <link type="text/css" rel="stylesheet" href="../static/css/main.css" />
-
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>E-Learing</title>
-    <style>
-        body{
-            font-family: 'Roboto', sans-serif;
-        }
-    </style>
-</head>
+<head th:replace="layout :: head('explore')"></head>
 
 <body class="grey lighten-4">
-<nav class="blue darken-2">
-    <div class="container">
-        <div class="nav-wrapper">
-            <a href="index.html" class="brand-logo">E-Learing</a>
-        </div>
-    </div>
-</nav>
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: flash"></div>
 
 <section class="section section-login">
     <div class="container">
         <div class="row">
-            <div class="col s12 m8 offset-m2 l6 offset-l3">
-                <div class="card-panel login blue darken-2 white-text center">
+            <div class="col s12 m8 offset-m2 l8 offset-l2">
+                <div class="card-panel blue-text center">
                     <h2>Register</h2>
                     <form th:action="@{SaveStudent}" method="post" th:object="${student}">
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{firstname}" id="FName">
-                            <label class="white-text" for="FName">First Name</label>
+                            <label class="blue-text" for="FName">First Name</label>
                         </div>
                         <div class="input-field">
-                            <i class="material-icons prefix">person</i>
-                            <input type="text" th:field="*{lastname}" id="LName">
-                            <label class="white-text" for="LName">Last Name</label>
-                        </div>
+                        <i class="material-icons prefix">person</i>
+                        <input type="text" th:field="*{lastname}" id="LName">
+                        <label class="blue-text" for="LName">Last Name</label>
+                    </div>
                         <div class="input-field">
                             <i class="material-icons prefix">email</i>
                             <input type="email" th:field="*{email}" id="email">
-                            <label class="white-text" for="email">E-mail</label>
+                            <label class="blue-text" for="email">E-mail</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">phone</i>
                             <input type="tel" th:field="*{phonenumber}" id="Phone">
-                            <label class="white-text" for="Phone">Phone Number</label>
+                            <label class="blue-text" for="Phone">Phone Number</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="number" th:field="*{age}" id="Age">
-                            <label class="white-text" for="Age">Age</label>
+                            <label class="blue-text" for="Age">Age</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">room</i>
                             <input type="text" th:field="*{city}" id="city">
-                            <label class="white-text" for="city">City</label>
+                            <label class="blue-text" for="city">City</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">room</i>
                             <input type="text" th:field="*{country}" id="country">
-                            <label class="white-text" for="country">Country</label>
+                            <label class="blue-text" for="country">Country</label>
                         </div>
-                        <div class="input-field">
-                            <i class="material-icons prefix">person</i>
-                            <input type="text" th:field="*{gender}" id="gender">
-                            <label class="white-text" for="gender">Gender</label>
-                        </div>
+
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{cne}" id="cne">
-                            <label class="white-text" for="cne">Speciality</label>
+                            <label class="blue-text" for="cne">Speciality</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{major}" id="major">
-                            <label class="white-text" for="major">Major</label>
+                            <label class="blue-text" for="major">Major</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{lastobtaineddegree}" id="lastobtaineddegree">
-                            <label class="white-text" for="lastobtaineddegree">Last Obtained Degree</label>
+                            <label class="blue-text" for="lastobtaineddegree">Last Obtained Degree</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{username}" id="username">
-                            <label class="white-text" for="username">User Name</label>
+                            <label class="blue-text" for="username">User Name</label>
                         </div>
                         <div class="input-field">
                             <i class="material-icons prefix">lock</i>
                             <input type="password" id="password">
-                            <label class="white-text" for="password">Password</label>
+                            <label class="blue-text" for="password">Password</label>
+                        </div>
+                        <div class="input-field">
+                            <select th:field="*{gender}" id="gender">
+                                <option value="male">male</option>
+                                <option value="female">female</option>
+
+                            </select>
+                            <label class="blue-text" for="gender">Gender</label>
                         </div>
                         <input type="submit" value="Register" class="btn btn-large btn-extended grey lighten-4 black-text">
                     </form>
@@ -109,46 +93,19 @@
 
 
 <!-- Footer -->
-<footer class="section blue darken-2 white-text center">
-    <p>E-Learing Copyright &copy; 2020</p>
-</footer>
 
+<div th:replace="layout :: footer"></div>
 
 
 <!-- Preloader -->
-<div class="loader preloader-wrapper big active">
-    <div class="spinner-layer spinner-blue-only">
-        <div class="circle-clipper left">
-            <div class="circle"></div>
-        </div>
-        <div class="gap-patch">
-            <div class="circle"></div>
-        </div>
-        <div class="circle-clipper right">
-            <div class="circle"></div>
-        </div>
-    </div>
-</div>
+<div th:replace="layout :: preload"></div>
 
-<!--Import jQuery before materialize.js-->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="../static/js/materialize.min.js"></script>
-
+<div th:replace="layout :: scripts"></div>
 <script>
-
-    // Hide Sections
-    $('.section').hide();
-
-    setTimeout(function () {
-        $(document).ready(function () {
-            // Show sections
-            $('.section').fadeIn();
-
-            // Hide preloader
-            $('.loader').fadeOut();
-
-        });
-    }, 1000);
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+    $('.dropdown-trigger').dropdown();
 </script>
 </body>
 
