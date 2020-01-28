@@ -1,3 +1,4 @@
+
 package com.ensaf.elearning.services;
 
 import com.ensaf.elearning.persistence.entities.Course;
@@ -16,5 +17,13 @@ public class SectionsService {
 
     public List<Section> getCoursSections(Course course){
         return sectionDAO.findAllByCourse(course);
+    }
+
+    public void addSectionForCourse(int courseId, Section section){
+        Course course = new Course();
+        course.setId(courseId);
+        section.setId(0l);
+        section.setCourse(course);
+        sectionDAO.save(section);
     }
 }

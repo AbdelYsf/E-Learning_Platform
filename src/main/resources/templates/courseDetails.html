@@ -7,7 +7,7 @@
 <div th:replace="layout :: nav"></div>
 <div th:replace="layout :: flash"></div>
 
-
+<div class="container">
 <section class="section  grey lighten-4">
 
         <div class="row">
@@ -25,18 +25,16 @@
                         <div class="row">
                             <span> Title:</span> <span class="card-title blue-text darken-3 large"  th:text="${cours.getTitle()}">Card Title</span>
                            <span>level :</span> <span class="card-title blue-text darken-3 large"  th:text="${cours.getLevel()}">Card Title</span>
-
-
-
                         </div>
-
+                        <a  href="#section-modal" class="modal-trigger  waves-effect waves-light btn blue">Add Section</a>
                         <div class="row  offset-l1 l10 m8 offset-m2">
                             <div >
                             <ul class="collapsible">
                                 <li th:each="s:${Sections}">
-                                    <div class="collapsible-header" th:text="${s.getSectionName()}"><i class="material-icons">filter_drama</i></div>
+                                    <div class="collapsible-header" th:text="${s.sectionName}"><i class="material-icons">filter_drama</i></div>
                                     <div class="collapsible-body">
-                                        <span th:text="${s.getDescription()}">Lorem ipsum dolor sit amet.</span>
+                                        <a  href="#part-modal" class="modal-trigger  waves-effect waves-light btn blue right-button">Add part</a>
+                                        <span th:text="${s.description}">Lorem ipsum dolor sit amet.</span>
 
                                     </div>
                                 </li>
@@ -44,17 +42,54 @@
                             </ul>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>
         </div>
 
 </section>
+</div>
+<!-- Add section Modal -->
+<div id="section-modal" class="modal">
+    <div class="modal-content">
+        <h4>Add section</h4>
+        <form th:action="@{addsection(id=${cours.id})}" method="post" th:object="${newsection}">
+            <div class="input-field">
+                <input type="text" th:field="*{sectionName}" id="sectionname">
+                <label for="sectionname">Name</label>
+            </div>
+            <div class="input-field">
+                <input type="text" th:field="*{description}" id="desc">
+                <label for="desc">description</label>
+            </div>
 
+            <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
+        </form>
+    </div>
+</div>
+<!-- Add part Modal -->
+<div id="part-modal" class="modal">
+    <div class="modal-content">
+        <h4>Add part</h4>
+        <form >
+            <div class="input-field">
+                <input type="text"  id="partname">
+                <label for="partname">Name</label>
+            </div>
+            <div class="file-field input-field">
+                <div class="btn blue">
+                    <span>File</span>
+                    <input type="file" name="picture" multiple>
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                </div>
+            </div>
 
+            <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
+        </form>
+    </div>
+</div>
 <!-- Footer -->
 <div th:replace="layout :: footer"></div>
 
@@ -67,6 +102,8 @@
     $(document).ready(function(){
         $('.collapsible').collapsible();
     });
+    // Init Modal
+    $('.modal').modal();
 </script>
 </body>
 

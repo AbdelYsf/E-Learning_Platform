@@ -75,7 +75,7 @@ public class CourseController {
         if(c!=null){
             HashMap<String,Object> model = new HashMap<>();
             model.put("cours",c);
-            model.put("sections",sections);
+            model.put("Sections",sections);
             model.put("newsection",new Section());
             modelAndView = new ModelAndView(viewName,model);
         }
@@ -88,7 +88,8 @@ public class CourseController {
     @RequestMapping(value = "/addsection",method = RequestMethod.POST)
     public ModelAndView addSection(Section section, @RequestParam(name = "id") int courseId){
 
-        coursService.addSectionForCourse(section,courseId);
+        //CoursService.addSectionForCourse(section,courseId);
+        sectionsService.addSectionForCourse(courseId,section);
         return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
     }
 

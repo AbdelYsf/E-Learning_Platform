@@ -1,6 +1,7 @@
 package com.ensaf.elearning.services;
 
 import com.ensaf.elearning.persistence.entities.Course;
+import com.ensaf.elearning.persistence.entities.Section;
 import com.ensaf.elearning.persistence.repositories.ICourseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,4 +43,7 @@ public class CoursService {
         }
     }
 
+
+    public void addSectionForCourse(Section section, int courseId) {
+    }
 }
