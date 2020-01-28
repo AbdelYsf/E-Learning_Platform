@@ -19,6 +19,7 @@
                             <input type="text" th:field="*{title}" id="title">
                             <label class="blue-text" for="title">Course Title</label>
                         </div>
+
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{level}" id="level">
@@ -40,9 +41,15 @@
                             <label class="blue-text" for="description">Description</label>
                         </div>
                         <div class="input-field">
+                            <select th:field="*{category.id}" id="categorie">
+                                <option th:each="c:${categories}" th:value="${c.id}" th:text="${c.CategoryName}"></option>
+                            </select>
+                            <label class="blue-text" for="categorie">Category</label>
+                        </div>
+                        <div class="input-field">
                             <i class="material-icons prefix">attach_money</i>
                             <input type="number" th:field="*{Price}" id="Price">
-                            <label class="blue-text" for="Price">Estimated Time</label>
+                            <label class="blue-text" for="Price">Price</label>
                         </div>
                         <div class="file-field input-field">
                             <div class="btn blue">
@@ -70,6 +77,11 @@
 <div th:replace="layout :: preload"></div>
 
 <div th:replace="layout :: scripts"></div>
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+</script>
 </body>
 
 </html>

@@ -20,7 +20,7 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
-    private String title;
+    public String title;
     public String description;
     public String prerequisites;
     public String level;
@@ -29,7 +29,7 @@ public class Course implements Serializable {
     public String Price;
    @ManyToOne
     @JoinColumn(name="categoy_id")
-    private Category category;
+    public Category category;
 
    @ManyToOne
    @JoinColumn(name = "inctructor_id")

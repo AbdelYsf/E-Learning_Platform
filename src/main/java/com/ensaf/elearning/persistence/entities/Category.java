@@ -16,8 +16,8 @@ import java.util.Collection;
 public class Category  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String  CategoryName;
+    public Long id;
+    public String  CategoryName;
 
     @OneToMany(mappedBy = "category" ,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Collection<Course> courses ;

@@ -1,7 +1,8 @@
 package com.ensaf.elearning.services;
 
+import com.ensaf.elearning.persistence.entities.Category;
 import com.ensaf.elearning.persistence.entities.Course;
-import com.ensaf.elearning.persistence.entities.Section;
+import com.ensaf.elearning.persistence.repositories.ICategoryDAO;
 import com.ensaf.elearning.persistence.repositories.ICourseDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class CoursService {
     @Autowired
     private ICourseDAO courseDAO;
+    @Autowired
+    private ICategoryDAO categoryDAO;
     @Value("${dir.images}")
     private String imageDir;
     public List<Course> getCourses(){
@@ -42,8 +45,7 @@ public class CoursService {
             return null;
         }
     }
-
-
-    public void addSectionForCourse(Section section, int courseId) {
+    public List<Category> getCategories(){
+        return categoryDAO.findAll();
     }
 }

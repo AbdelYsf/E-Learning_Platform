@@ -1,5 +1,6 @@
 package com.ensaf.elearning.presentation.controllers;
 
+import com.ensaf.elearning.persistence.entities.Category;
 import com.ensaf.elearning.persistence.entities.Course;
 import com.ensaf.elearning.persistence.entities.Section;
 import com.ensaf.elearning.services.CoursService;
@@ -48,8 +49,10 @@ public class CourseController {
     @RequestMapping(value = "/create",method = RequestMethod.GET)
     public String Create(Model model){
         model.addAttribute("course",new Course());
+        model.addAttribute("categories",CoursService.getCategories());
         return "CreateCourse";
     }
+    //getCategories
 
     @RequestMapping(value = "/AddCourse",method = RequestMethod.POST)
     public String Add(Course course, @RequestParam(name = "picture")MultipartFile file){
