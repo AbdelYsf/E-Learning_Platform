@@ -43,6 +43,7 @@
                         <div class="input-field">
                             <select th:field="*{category.id}" id="categorie">
                                 <option th:each="c:${categories}" th:value="${c.id}" th:text="${c.CategoryName}"></option>
+
                             </select>
                             <label class="blue-text" for="categorie">Category</label>
                         </div>
@@ -67,6 +68,27 @@
         </div>
     </div>
 </section>
+<div class="fixed-action-btn">
+    <a href="#categorie-modal" class="modal-trigger btn-floating btn-large red">
+        <i class="material-icons">add</i>
+    </a>
+</div>
+<!-- Add categorie Modal -->
+<div id="categorie-modal" class="modal">
+    <div class="modal-content">
+        <h4>Add new category</h4>
+        <form th:action="@{addCategorie}" method="post" th:object="${category}">
+            <div class="input-field">
+                <input type="text" th:field="*{CategoryName}" id="categoryname">
+                <label for="categoryname">Name</label>
+            </div>
+            <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
+        </form>
+    </div>
+</div>
+
+
+
 
 <!-- Footer -->
 
@@ -81,6 +103,8 @@
     $(document).ready(function(){
         $('select').formSelect();
     });
+    // Init Modal
+    $('.modal').modal();
 </script>
 </body>
 

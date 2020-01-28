@@ -45,11 +45,17 @@ public class CourseController {
         model.addAttribute("Courses",crs);
         return "Courses";
     }
+    @RequestMapping(value = "/addCategorie",method = RequestMethod.POST)
+    public String AddCategorie(Category category){
 
+        CoursService.AddCategorie(category);
+        return "redirect:/courses/create";
+    }
     @RequestMapping(value = "/create",method = RequestMethod.GET)
     public String Create(Model model){
         model.addAttribute("course",new Course());
         model.addAttribute("categories",CoursService.getCategories());
+        model.addAttribute("category",new Category());
         return "CreateCourse";
     }
     //getCategories
@@ -59,6 +65,7 @@ public class CourseController {
         CoursService.AddCourse(course,file);
         return "redirect:/courses/index";
     }
+
     @RequestMapping(value = "/getPhoto",produces={MediaType.IMAGE_JPEG_VALUE})
     @ResponseBody
     public byte[] getPhoto(int id) throws Exception{

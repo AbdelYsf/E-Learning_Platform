@@ -48,4 +48,7 @@ public class CoursService {
     public List<Category> getCategories(){
         return categoryDAO.findAll();
     }
+    public void AddCategorie(Category category){
+        categoryDAO.save(category);
+    }
 }
