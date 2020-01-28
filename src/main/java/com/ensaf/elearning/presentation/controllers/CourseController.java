@@ -2,7 +2,7 @@ package com.ensaf.elearning.presentation.controllers;
 
 import com.ensaf.elearning.persistence.entities.Course;
 import com.ensaf.elearning.persistence.entities.Section;
-import com.ensaf.elearning.services.CourseService;
+import com.ensaf.elearning.services.CoursService;
 import com.ensaf.elearning.services.SectionsService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ import java.util.List;
 public class CourseController {
 
     @Autowired
-    private CourseService courseService;
+    private CoursService CoursService;
     @Autowired
     private SectionsService sectionsService;
     @Value("${dir.images}")
@@ -40,7 +40,7 @@ public class CourseController {
 
     @RequestMapping(value = "/index")
     public String Index(Model model){
-        List<Course> crs=courseService.getCourses();
+        List<Course> crs=CoursService.getCourses();
         model.addAttribute("Courses",crs);
         return "Courses";
     }
@@ -53,7 +53,7 @@ public class CourseController {
 
     @RequestMapping(value = "/AddCourse",method = RequestMethod.POST)
     public String Add(Course course, @RequestParam(name = "picture")MultipartFile file){
-        courseService.AddCourse(course,file);
+        CoursService.AddCourse(course,file);
         return "redirect:/courses/index";
     }
     @RequestMapping(value = "/getPhoto",produces={MediaType.IMAGE_JPEG_VALUE})
@@ -69,7 +69,7 @@ public class CourseController {
         String viewName = "courseDetails";
 
         ModelAndView modelAndView ;
-        Course c =  courseService.getCoursebyId(id);
+        Course c =  CoursService.getCoursebyId(id);
         List<Section> sections =sectionsService.getCoursSections(c);
         logger.info("found {} sections of courseId {}",sections.size(),c.id);
         if(c!=null){

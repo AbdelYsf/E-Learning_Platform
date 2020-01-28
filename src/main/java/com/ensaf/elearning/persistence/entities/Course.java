@@ -20,7 +20,7 @@ public class Course implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
-    public String title;
+    private String title;
     public String description;
     public String prerequisites;
     public String level;
