@@ -13,7 +13,7 @@
             <div class="col s12 m8 offset-m2 l8 offset-l2">
                 <div class="card-panel login blue-text center">
                     <h5>adding a course</h5>
-                    <form th:action="@{AddCourse}" method="post" th:object="${course}">
+                    <form th:action="@{AddCourse}" method="post" th:object="${course}" enctype="multipart/form-data">
                         <div class="input-field">
                             <i class="material-icons prefix">person</i>
                             <input type="text" th:field="*{title}" id="title">
@@ -30,11 +30,29 @@
                             <label class="blue-text" for="prerequisites">Prerequisites</label>
                         </div>
                         <div class="input-field">
-                            <i class="material-icons prefix">phone</i>
+                            <i class="material-icons prefix">access_time</i>
                             <input type="text" th:field="*{estimatedTime}" id="estimatedTime">
                             <label class="blue-text" for="estimatedTime">Estimated Time</label>
                         </div>
-
+                        <div class="input-field">
+                            <i class="material-icons prefix">person</i>
+                            <textarea th:field="*{description}" id="description"></textarea>
+                            <label class="blue-text" for="description">Description</label>
+                        </div>
+                        <div class="input-field">
+                            <i class="material-icons prefix">attach_money</i>
+                            <input type="number" th:field="*{Price}" id="Price">
+                            <label class="blue-text" for="Price">Estimated Time</label>
+                        </div>
+                        <div class="file-field input-field">
+                            <div class="btn blue">
+                                <span>File</span>
+                                <input type="file" name="picture" multiple>
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Upload one or more files">
+                            </div>
+                        </div>
                         <input type="submit" value="Create" class="btn btn-large btn-extended grey lighten-4 black-text">
                     </form>
                 </div>

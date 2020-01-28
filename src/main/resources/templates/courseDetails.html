@@ -14,8 +14,8 @@
             <div class="col s12">
                 <div class="card large" >
                     <div class="card-image">
-                    <img th:src="@{/img/cours.jpg}">
-                    <span class="card-title blue-text darken-3 large"  th:text="${cours.getTitle()}">Card Title</span>
+                    <img th:src="@{getPhoto(id=${cours.id})}">
+                    <span class="card-title blue-text darken-3 large"  th:text="${cours.title}">Card Title</span>
 
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                         <div class="row  offset-l1 l10 m8 offset-m2">
                             <div >
                             <ul class="collapsible">
-                                <li th:each="s:${sections}">
+                                <li th:each="s:${Sections}">
                                     <div class="collapsible-header" th:text="${s.getSectionName()}"><i class="material-icons">filter_drama</i></div>
                                     <div class="collapsible-body">
                                         <span th:text="${s.getDescription()}">Lorem ipsum dolor sit amet.</span>

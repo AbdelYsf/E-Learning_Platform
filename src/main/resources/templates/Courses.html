@@ -17,13 +17,13 @@
                         <div class="col s12 m6" th:each="c:${Courses}">
                             <div class="card">
                                 <div class="card-image">
-                                    <img th:src="@{/img/cours.jpg}">
-                                    <span class="card-title blue-text darken-4"  th:text="${c.getTitle()}">Card Title</span>
+                                    <img th:src="@{getPhoto(id=${c.id})}">
+                                    <span class="card-title blue-text darken-4"  th:text="${c.title}">Card Title</span>
                                     <a th:href="@{/courses/coursDetails(id=${c.id})}" class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">dehaze</i></a>
                                 </div>
                                 <div class="card-content">
-                                    <p th:text="${c.getDescription()}">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                                    <p th:text="${c.getLevel()}">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                    <p th:text="${c.description}">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                    <p th:text="${c.level}">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                                 </div>
                             </div>
                         </div>

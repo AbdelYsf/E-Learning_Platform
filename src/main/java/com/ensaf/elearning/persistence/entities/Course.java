@@ -19,13 +19,14 @@ public class Course implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Integer id;
-    private  String title;
+    public Integer id;
+    public String title;
     public String description;
     public String prerequisites;
     public String level;
     public String estimatedTime;
-
+    public String imagePath;
+    public String Price;
    @ManyToOne
     @JoinColumn(name="categoy_id")
     private Category category;

@@ -16,9 +16,9 @@ import java.util.Collection;
 public class Section  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String sectionName;
-    private String description;
+    public Long id;
+    public String sectionName;
+    public String description;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
