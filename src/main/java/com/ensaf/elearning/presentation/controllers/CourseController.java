@@ -76,12 +76,20 @@ public class CourseController {
             HashMap<String,Object> model = new HashMap<>();
             model.put("cours",c);
             model.put("sections",sections);
+            model.put("newsection",new Section());
             modelAndView = new ModelAndView(viewName,model);
         }
         else{
             modelAndView = new ModelAndView("errorpage");
         }
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/addsection",method = RequestMethod.POST)
+    public ModelAndView addSection(Section section, @RequestParam(name = "id") int courseId){
+
+        coursService.addSectionForCourse(section,courseId);
+        return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
     }
 
 }
