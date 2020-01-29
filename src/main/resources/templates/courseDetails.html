@@ -33,10 +33,11 @@
                                 <li th:each="s:${Sections}">
                                     <div class="collapsible-header" th:text="${s.sectionName}"><i class="material-icons">filter_drama</i></div>
                                     <div class="collapsible-body">
-                                        <a  href="#part-modal" class="modal-trigger  waves-effect waves-light btn blue right-button">Add part</a>
+                                        <a  th:href="@{/courses/section(sectionId=${s.id})}" class="modal-trigger  waves-effect waves-light btn blue right-button">Add part</a>
                                         <span th:text="${s.description}">Lorem ipsum dolor sit amet.</span>
 
                                     </div>
+
                                 </li>
 
                             </ul>
@@ -53,7 +54,7 @@
 <div id="section-modal" class="modal">
     <div class="modal-content">
         <h4>Add section</h4>
-        <form th:action="@{addsection(id=${cours.id})}" method="post" th:object="${newsection}">
+        <form th:action="@{addsection(id=${cours.id}}" method="post" th:object="${newsection}">
             <div class="input-field">
                 <input type="text" th:field="*{sectionName}" id="sectionname">
                 <label for="sectionname">Name</label>
@@ -67,29 +68,8 @@
         </form>
     </div>
 </div>
-<!-- Add part Modal -->
-<div id="part-modal" class="modal">
-    <div class="modal-content">
-        <h4>Add part</h4>
-        <form >
-            <div class="input-field">
-                <input type="text"  id="partname">
-                <label for="partname">Name</label>
-            </div>
-            <div class="file-field input-field">
-                <div class="btn blue">
-                    <span>File</span>
-                    <input type="file" name="picture" multiple>
-                </div>
-                <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Upload one or more files">
-                </div>
-            </div>
 
-            <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
-        </form>
-    </div>
-</div>
+
 <!-- Footer -->
 <div th:replace="layout :: footer"></div>
 

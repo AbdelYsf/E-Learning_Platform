@@ -2,6 +2,7 @@ package com.ensaf.elearning.presentation.controllers;
 
 import com.ensaf.elearning.persistence.entities.Category;
 import com.ensaf.elearning.persistence.entities.Course;
+import com.ensaf.elearning.persistence.entities.Part;
 import com.ensaf.elearning.persistence.entities.Section;
 import com.ensaf.elearning.services.CoursService;
 import com.ensaf.elearning.services.SectionsService;
@@ -87,6 +88,7 @@ public class CourseController {
             model.put("cours",c);
             model.put("Sections",sections);
             model.put("newsection",new Section());
+
             modelAndView = new ModelAndView(viewName,model);
         }
         else{
@@ -101,6 +103,20 @@ public class CourseController {
         //CoursService.addSectionForCourse(section,courseId);
         sectionsService.addSectionForCourse(courseId,section);
         return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
+    }
+    @RequestMapping(value = "/addpart",method = RequestMethod.POST)
+    public ModelAndView addPart( Part part ,long sectionId, int courseId){
+            sectionsService.addPartSection(part , sectionId);
+        return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
+    }
+
+    @RequestMapping(value = "/section",method = RequestMethod.GET)
+    public ModelAndView addPart(int sectionId){
+
+        HashMap<String,Object> model = new HashMap<>();
+        model.put("newPart", new Part());
+
+        return new ModelAndView("addpart",model);
     }
 
 }
