@@ -98,24 +98,25 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/addsection",method = RequestMethod.POST)
-    public ModelAndView addSection(Section section, @RequestParam(name = "id") int courseId){
+    public ModelAndView addSection(Section section, @RequestParam(name = "id") Integer courseId){
 
         //CoursService.addSectionForCourse(section,courseId);
         sectionsService.addSectionForCourse(courseId,section);
         return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
     }
     @RequestMapping(value = "/addpart",method = RequestMethod.POST)
-    public ModelAndView addPart( Part part ,long sectionId, int courseId){
-            sectionsService.addPartSection(part , sectionId);
-        return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
+    public ModelAndView addPart( Part part ,Long sectionid, int courseid){
+            sectionsService.addPartSection(part , sectionid);
+        return new ModelAndView("redirect:/courses/coursDetails?id="+courseid);
     }
 
     @RequestMapping(value = "/section",method = RequestMethod.GET)
-    public ModelAndView addPart(int sectionId){
+    public ModelAndView addPart(Long sectionid,Integer courseid){
 
         HashMap<String,Object> model = new HashMap<>();
         model.put("newPart", new Part());
-
+        model.put("sectionid",sectionid);
+        model.put("courseid",courseid);
         return new ModelAndView("addpart",model);
     }
 

@@ -16,10 +16,10 @@ import java.util.Collection;
 public class Part implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String partName;
-    private String description;
-    private String path;
+    public Long id;
+    public String partName;
+    public String description;
+    public String path;
 
     @ManyToOne
     @JoinColumn(name = "section_id")
