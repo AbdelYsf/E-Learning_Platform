@@ -26,21 +26,38 @@
                             <span> Categorie:</span> <span class="card-title blue-text darken-3 large"  th:text="${cours.category.CategoryName}">Card Title</span>
                            <span>level :</span> <span class="card-title blue-text darken-3 large"  th:text="${cours.getLevel()}">Card Title</span>
                         </div>
-                        <a  href="#section-modal" class="modal-trigger  waves-effect waves-light btn blue">Add Section</a>
+                        <!--<a  href="#section-modal" class="modal-trigger  waves-effect waves-light btn blue">Add Section</a>-->
                         <div class="row  offset-l1 l10 m8 offset-m2">
                             <div >
                             <ul class="collapsible">
                                 <li th:each="s:${Sections}">
-                                    <div class="collapsible-header" th:text="${s.sectionName}"><i class="material-icons">filter_drama</i></div>
+                                    <div class="collapsible-header" style="font-size:200%;" th:text="${s.sectionName} "></div>
                                     <div class="collapsible-body">
-                                        <a th:href="@{/courses/section(sectionid=${s.id},courseid=${s.course.id})}" class="modal-trigger  waves-effect waves-light btn blue right-button">Add part</a>
-                                        <span th:text="${s.description}">Lorem ipsum dolor sit amet.</span>
+                                        <span style="font-size:130%;" th:text="${s.description}"></span>
+                                        <h1 style="font-size:180%;">Parts :</h1>
+                                        <div style="text-align:center" th:each="p:${s.part}">
+                                            <div class="collapsible-header" style="font-size:130%;" th:text="${p.partName}"><i class="material-icons">filter_drama</i></div>
+                                            <span th:text="${p.description}"></span><br>
+                                            <span th:if="${p.FileType == 'VIDEO'}">
+                                            <video width="320" height="240" controls>
+                                                <source th:src="@{getPhoto2(id=${p.id})}" type="video/mp4">
+                                            </video> </span>
+                                            <span th:unless="${p.FileType == 'VIDEO'}">
+                                            <a th:href="@{getFile(id=${p.id})}" target="_blank">Read more</a></span>
+                                        </div>
+
+                                        <div style="text-align:right">
+                                        <a th:href="@{/courses/section(sectionid=${s.id},courseid=${s.course.id})}" class="btn-floating btn-large waves-effect waves-light right-align blue" ><i class="material-icons">add</i></a>
+                                        </div>
+                                            <!--<a th:href="@{/courses/section(sectionid=${s.id},courseid=${s.course.id})}" class="modal-trigger  waves-effect waves-light btn blue right-button">Add part</a>-->
 
                                     </div>
 
                                 </li>
 
                             </ul>
+                                <a href="#section-modal" class="modal-trigger btn-floating btn-large waves-effect waves-light right-align blue" ><i class="material-icons">add</i></a>
+
                             </div>
                         </div>
                     </div>

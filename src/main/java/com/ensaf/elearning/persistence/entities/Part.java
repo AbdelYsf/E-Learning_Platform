@@ -19,6 +19,7 @@ public class Part implements Serializable {
     public Long id;
     public String partName;
     public String description;
+    public String FileType;
     public String path;
 
     @ManyToOne

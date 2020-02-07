@@ -5,6 +5,7 @@ import com.ensaf.elearning.persistence.entities.Course;
 import com.ensaf.elearning.persistence.entities.Part;
 import com.ensaf.elearning.persistence.entities.Section;
 import com.ensaf.elearning.services.CoursService;
+import com.ensaf.elearning.services.PartService;
 import com.ensaf.elearning.services.SectionsService;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -35,9 +36,12 @@ public class CourseController {
     private CoursService CoursService;
     @Autowired
     private SectionsService sectionsService;
+    @Autowired
+    private PartService partService;
     @Value("${dir.images}")
     private String imageDir;
-
+    @Value("${dir.videos}")
+    private String videoDir;
     private Logger logger = LoggerFactory.getLogger(CourseController.class);
 
     @RequestMapping(value = "/index")
@@ -104,11 +108,30 @@ public class CourseController {
         sectionsService.addSectionForCourse(courseId,section);
         return new ModelAndView("redirect:/courses/coursDetails?id="+courseId);
     }
+
     @RequestMapping(value = "/addpart",method = RequestMethod.POST)
-    public ModelAndView addPart( Part part ,Long sectionid, int courseid){
-            sectionsService.addPartSection(part , sectionid);
+    public ModelAndView addPart(Part part ,Long sectionid, int courseid, @RequestParam(name = "video")MultipartFile file){
+        sectionsService.addPartSection(part , sectionid);
+        partService.AddVideo(part,file);
         return new ModelAndView("redirect:/courses/coursDetails?id="+courseid);
     }
+
+    @RequestMapping(value = "/getPhoto2",produces={MediaType.APPLICATION_STREAM_JSON_VALUE})
+    @ResponseBody
+    public byte[] getPhoto2(int id) throws Exception{
+        File f=new File(videoDir+id);
+        return IOUtils.toByteArray(new FileInputStream(f));
+
+    }
+
+    @RequestMapping(value = "/getFile",produces={MediaType.APPLICATION_PDF_VALUE})
+    @ResponseBody
+    public byte[] getFile(int id) throws Exception{
+        File f=new File(videoDir+id);
+        return IOUtils.toByteArray(new FileInputStream(f));
+
+    }
+
 
     @RequestMapping(value = "/section",method = RequestMethod.GET)
     public ModelAndView addPart(Long sectionid,Integer courseid){

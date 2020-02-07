@@ -22,9 +22,9 @@ public class Section  implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    private Course course;
+    public Course course;
 
     @OneToMany(mappedBy = "section")
-    private Collection<Part> part;
+    public Collection<Part> part;
 
 }

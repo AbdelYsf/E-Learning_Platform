@@ -24,10 +24,17 @@
                             <input type="text" th:field="*{description}" id="desc">
                             <label class="blue-text" for="desc">description</label>
                         </div>
+                        <div class="input-field">
+                            <select th:field="*{FileType}" id="Type">
+                                <option value="PDF">PDF</option>
+                                <option value="VIDEO">VIDEO</option>
+                            </select>
+                            <label class="blue-text" for="Type">File Type</label>
+                        </div>
                         <div class="file-field input-field">
                             <div class="btn blue">
                                 <span>File</span>
-                                <input type="file" name="picture" multiple>
+                                <input type="file" name="video" multiple>
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" placeholder="Upload one or more files">
