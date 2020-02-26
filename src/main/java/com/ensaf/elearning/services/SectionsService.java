@@ -36,6 +36,5 @@ public class SectionsService {
         section.setId(sectionId);
         part.setSection(section);
         partDAO.save(part);
-
     }
 }

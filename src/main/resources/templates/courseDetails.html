@@ -9,7 +9,6 @@
 
 <div class="container">
 <section class="section  grey lighten-4">
-
         <div class="row">
             <div class="col s12">
                 <div class="card large" >
@@ -18,14 +17,23 @@
                     <span class="card-title blue-text darken-3 large"  th:text="${cours.getTitle()}">Card Title</span>
 
                     </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <span> Categorie:</span> <span class="c large flow-text"  th:text="${cours.category.CategoryName}">Card Title</span>
+                            <br>
+                            <span>level :</span> <span class="large flow-text"  th:text="${cours.getLevel()}">Card Title</span>
+                            <br>
+                            <span>description :</span> <span class=" large flow-text"  th:text="${cours.getDescription()}">Card Title</span>
+                            <br>
+                            <span>prerequis :</span> <span class=" large flow-text"  th:text="${cours.getPrerequisites()}">Card Title</span>
+                            <br>
+                        </div>
+                    </div>
                 </div>
                 <div class="card">
                     <div class="card-content">
 
-                        <div class="row">
-                            <span> Categorie:</span> <span class="card-title blue-text darken-3 large"  th:text="${cours.category.CategoryName}">Card Title</span>
-                           <span>level :</span> <span class="card-title blue-text darken-3 large"  th:text="${cours.getLevel()}">Card Title</span>
-                        </div>
+
                         <!--<a  href="#section-modal" class="modal-trigger  waves-effect waves-light btn blue">Add Section</a>-->
                         <div class="row  offset-l1 l10 m8 offset-m2">
                             <div >
