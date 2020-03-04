@@ -75,19 +75,19 @@
         <i class="material-icons">add</i>
     </a>
 </div>
-<!-- Add categorie Modal -->
-<div id="categorie-modal" class="modal">
-    <div class="modal-content">
-        <h4>Add new category</h4>
-        <form th:action="@{addCategorie}" method="post" th:object="${category}">
-            <div class="input-field">
-                <input type="text" th:field="*{CategoryName}" id="categoryname">
-                <label for="categoryname">Name</label>
-            </div>
-            <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
-        </form>
+    <!-- Add categorie Modal -->
+    <div id="categorie-modal" class="modal">
+        <div class="modal-content">
+            <h4>Add new category</h4>
+            <form th:action="@{addCategorie}" method="post" th:object="${category}">
+                <div class="input-field">
+                    <input type="text" th:field="*{CategoryName}" id="categoryname">
+                    <label for="categoryname">Name</label>
+                </div>
+                <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
+            </form>
+        </div>
     </div>
-</div>
 
 
 

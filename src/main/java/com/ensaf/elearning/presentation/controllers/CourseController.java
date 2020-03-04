@@ -44,11 +44,18 @@ public class CourseController {
     private String videoDir;
     private Logger logger = LoggerFactory.getLogger(CourseController.class);
 
-    @RequestMapping(value = "/index")
-    public String Index(Model model){
-        List<Course> crs=CoursService.getCourses();
+    @RequestMapping(value = "/mycourses")
+    public String myCourses(Model model){
+        List<Course> crs=CoursService.getCoursesOfPrincipal();
         model.addAttribute("Courses",crs);
         return "Courses";
+    }
+
+    @RequestMapping(value = "/allcourses")
+    public String allCourses(Model model){
+        List<Course> crs=CoursService.getCoursesOfPrincipal();
+        model.addAttribute("Courses",crs);
+        return "allcourses";
     }
     @RequestMapping(value = "/addCategorie",method = RequestMethod.POST)
     public String AddCategorie(Category category){

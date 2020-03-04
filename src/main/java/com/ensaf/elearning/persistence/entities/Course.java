@@ -25,6 +25,7 @@ public class Course implements Serializable {
     public String prerequisites;
     public String level;
     public String estimatedTime;
+    public  boolean isApproved;
     public String imagePath;
     public String Price;
    @ManyToOne

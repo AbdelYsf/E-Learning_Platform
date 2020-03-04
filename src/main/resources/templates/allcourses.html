@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head('explore')"></head>
+
+<body class="grey lighten-4">
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: flash"></div>
+<section class="section  grey lighten-4">
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card" >
+                    <div class="card-content">
+                        <span class="card-title">courses</span>
+                    <div class="row">
+                        <div class="col s12 m6" th:each="c:${Courses}">
+                            <div class="card sticky-action">
+                                <div class="card-image">
+                                    <div class="card-image waves-effect waves-block waves-light">
+                                        <img th:src="@{getPhoto(id=${c.id})}">
+                                    </div>
+
+                                    <h2 class="card-title black-text"  th:text="${c.title}">Card Title</h2>
+
+                                </div>
+                                <div class="card-content">
+                                    <span class="card-title activator grey-text text-darken-4" th:text="${c.title}" >Card Title<i class="material-icons right">more_vert</i></span>
+                                    <p th:text="${c.level}">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                    <p th:text="${c.category.CategoryName}">I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+                                </div>
+                                <div class="card-action">
+                                    <a href="#" class="btn red">Acheter</a>
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4" th:text="${c.title}" >Card Title<i class="material-icons right">close</i></span>
+                                   <br><span>Description</span> <p th:text="${c.description}">Here is some more information about this product that is only revealed once clicked on.</p>
+                                   <br><span>Prérequis</span> <p th:text="${c.prerequisites}">Here is some more information about this product that is only revealed once clicked on.</p>
+                                   <br><span>Difficulté</span> <p th:text="${c.getLevel()}">Here is some more information about this product that is only revealed once clicked on.</p>
+                                   <br><span>durré</span> <p th:text="${c.estimatedTime}">Here is some more information about this product that is only revealed once clicked on.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-action">
+                        <ul class="pagination">
+                            <li class="disabled">
+                                <a href="#!" class="blue-text">
+                                    <i class="material-icons">chevron_left</i>
+                                </a>
+                            </li>
+                            <li class="active blue lighten-2">
+                                <a href="#!" class="white-text">1</a>
+                            </li>
+                            <li class="waves-effect">
+                                <a href="#!" class="blue-text">2</a>
+                            </li>
+                            <li class="waves-effect">
+                                <a href="#!" class="blue-text">3</a>
+                            </li>
+                            <li class="waves-effect">
+                                <a href="#!" class="blue-text">4</a>
+                            </li>
+                            <li class="waves-effect">
+                                <a href="#!" class="blue-text">5</a>
+                            </li>
+                            <li class="waves-effect">
+                                <a href="#!" class="blue-text">
+                                    <i class="material-icons">chevron_right</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+
+
+
+<!-- Fixed Action Button -->
+<div class="fixed-action-btn">
+    <a href="#search-modal" class="modal-trigger btn-floating btn-large red">
+        <i class="material-icons">search</i>
+    </a>
+</div>
+
+<!-- serach Modal -->
+<div id="search-modal" class="modal">
+    <div class="modal-content">
+        <h4>chercher</h4>
+        <form th:action="@{search}" method="post" >
+            <div class="input-field">
+               <!-- <input type="text" th:field="*{CategoryName}" id="categoryname">-->
+               <!-- <label for="categoryname">Name</label>-->
+            </div>
+            <input type="submit" value="chercher" class="modal-action modal-close btn blue white-text">
+        </form>
+    </div>
+</div>
+<!-- Footer -->
+
+<div th:replace="layout :: footer"></div>
+
+
+<!-- Preloader -->
+<div th:replace="layout :: preload"></div>
+
+<div th:replace="layout :: scripts"></div>
+
+<script>
+    // Init Modal
+    $('.modal').modal();
+</script>
+</body>
+
+</html>
