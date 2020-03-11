@@ -18,3 +18,43 @@
 .tit{
   font-size: 55px !important;
 }
+.price {
+  width: 70px;
+  height: 70px;
+  font-weight: 300;
+  font-size: 1.2rem;
+  line-height: 56px;
+  margin: 10px;
+  position: absolute;
+  top: 0;
+  letter-spacing: 0;
+  background-color: #ff4081 !importanT;
+}
+
+.card .card-title {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+ul.card-action-buttons {
+  margin: -18px 7px 0 0;
+  text-align: right;
+}
+.material-icons{
+  display: inline-flex;
+  vertical-align: top;
+}
+ul.card-action-buttons li {
+  display: inline-block;
+  padding-left: 7px;
+}
+.al{
+  font-size:21px;
+  line-height:24px;
+}
+.collapsible-header {
+  text-align: center !important;
+  padding-right: 0em !important;
+}

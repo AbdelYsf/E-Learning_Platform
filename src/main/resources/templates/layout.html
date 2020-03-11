@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head th:fragment="head(page_title)" lang="en">
         <meta charset="UTF-8"/>
         <!--Let browser know website is optimized for mobile-->
@@ -7,7 +7,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--<link type="text/css" rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />-->
         <link type="text/css" rel="stylesheet" th:href="@{/css/main.css}" />
         <title th:text="'elearning | ' + ${page_title}">elearning</title>
@@ -19,28 +19,46 @@
     <nav class="blue darken-2">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="index" class="brand-logo">E-Learing</a>
+                <a href="/home" class="brand-logo">E-Learing</a>
                 <a href="#" data-activates="side-nav" class="button-collapse show-on-large right">
                     <i class="material-icons">menu</i>
                 </a>
                 <ul class="right hide-on-med-and-down">
 
                     <li>
-                        <a href="/courses/allcourses">Home</a>
-                    </li>
-                    <li>
-                        <a href="/courses/mycourses">mes cours</a>
+                        <a href="/courses/home">Home</a>
                     </li>
 
+                        <li sec:authorize="hasAuthority('student')">
+                            <a href="/student/student-courses">mes cours</a>
+                        </li>
+                        <li sec:authorize="hasAuthority('instructor')">
+                            <a href="/instructor/own-courses">mes cours</a>
+                        </li>
+                        <li sec:authorize="hasAuthority('instructor')">
+                            <a href="/instructor/dashbord">Dashbord</a>
+                        </li>
                     <li>
-                        <a href="categories.html">mon Profile</a>
+                        <a href="#">mon Profile</a>
                     </li>
-                    <li class="active">
-                        <a href="/home">Dashboard</a>
+                    <li sec:authorize="isAuthenticated()">
+                        <a class='dropdown-trigger btn blue darken-2' href='#' >
+
+                           Bonjour <span sec:authentication="name">Bob</span> !
+                        </a>
                     </li>
+
+
+
 
                 </ul>
 
+                <!-- Dropdown Structure -->
+                <ul id='dropdown1' class='dropdown-content '>
+
+                    <li th:each="c:${Courses}" ><a href="#!" class="blue-text">two</a></li>
+
+                </ul>
             </div>
         </div>
     </nav>

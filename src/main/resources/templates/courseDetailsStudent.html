@@ -55,16 +55,14 @@
                                             <a th:href="@{getFile(id=${p.id})}" target="_blank">Read more</a></span>
                                         </div>
 
-                                        <div style="text-align:right">
-                                        <a th:href="@{/courses/section(sectionid=${s.id},courseid=${s.course.id})}" class="btn-floating btn-large waves-effect waves-light right-align blue" ><i class="material-icons">add</i></a>
-                                        </div>
+
                                             <!--<a th:href="@{/courses/section(sectionid=${s.id},courseid=${s.course.id})}" class="modal-trigger  waves-effect waves-light btn blue right-button">Add part</a>-->
                                     </div>
 
                                 </li>
 
                             </ul>
-                                <a href="#section-modal" class="modal-trigger btn-floating btn-large waves-effect waves-light right-align blue" ><i class="material-icons">add</i></a>
+
 
                             </div>
                         </div>
@@ -75,24 +73,7 @@
 
 </section>
 </div>
-<!-- Add section Modal -->
-<div id="section-modal" class="modal">
-    <div class="modal-content">
-        <h4>Add section</h4>
-        <form th:action="@{addsection(id=${cours.id})}" method="post" th:object="${newsection}">
-            <div class="input-field">
-                <input type="text" th:field="*{sectionName}" id="sectionname">
-                <label for="sectionname">Name</label>
-            </div>
-            <div class="input-field">
-                <input type="text" th:field="*{description}" id="desc">
-                <label for="desc">description</label>
-            </div>
 
-            <input type="submit" value="Add" class="modal-action modal-close btn blue white-text">
-        </form>
-    </div>
-</div>
 
 
 <!-- Footer -->

@@ -4,6 +4,8 @@ import com.ensaf.elearning.persistence.entities.Category;
 import com.ensaf.elearning.persistence.entities.Course;
 import com.ensaf.elearning.persistence.entities.Part;
 import com.ensaf.elearning.persistence.entities.Section;
+import com.ensaf.elearning.persistence.repositories.ICategoryDAO;
+import com.ensaf.elearning.persistence.repositories.InstructorDAO;
 import com.ensaf.elearning.services.CoursService;
 import com.ensaf.elearning.services.PartService;
 import com.ensaf.elearning.services.SectionsService;
@@ -16,10 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,34 +28,30 @@ import java.util.HashMap;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/courses")
+@RequestMapping(value ="/courses")
 public class CourseController {
 
+    @Autowired
+    private CoursService coursService;
     @Autowired
     private CoursService CoursService;
     @Autowired
     private SectionsService sectionsService;
     @Autowired
     private PartService partService;
+    @Autowired
+    private ICategoryDAO iCategoryDAO;
+    @Autowired
+    private InstructorDAO instructorDAO;
     @Value("${dir.images}")
     private String imageDir;
     @Value("${dir.videos}")
     private String videoDir;
     private Logger logger = LoggerFactory.getLogger(CourseController.class);
 
-    @RequestMapping(value = "/mycourses")
-    public String myCourses(Model model){
-        List<Course> crs=CoursService.getCoursesOfPrincipal();
-        model.addAttribute("Courses",crs);
-        return "Courses";
-    }
 
-    @RequestMapping(value = "/allcourses")
-    public String allCourses(Model model){
-        List<Course> crs=CoursService.getCoursesOfPrincipal();
-        model.addAttribute("Courses",crs);
-        return "allcourses";
-    }
+
+
     @RequestMapping(value = "/addCategorie",method = RequestMethod.POST)
     public String AddCategorie(Category category){
 
@@ -85,6 +80,15 @@ public class CourseController {
         return IOUtils.toByteArray(new FileInputStream(f));
 
     }
+    @GetMapping("/home")
+    public String home(Model model){
+        List<Course> crs=coursService.getActiveCourses();
+        model.addAttribute("Courses",crs);
+        List<Category> categories = iCategoryDAO.findAll();
+        model.addAttribute("categorie",categories);
+        model.addAttribute("profs",instructorDAO.findAll());
+        return "allcourses";
+    }
 
     @RequestMapping(value = "/coursDetails",method = RequestMethod.GET)
     public ModelAndView coursDetails(@RequestParam int id){
@@ -107,6 +111,7 @@ public class CourseController {
         }
         return modelAndView;
     }
+
 
     @RequestMapping(value = "/addsection",method = RequestMethod.POST)
     public ModelAndView addSection(Section section, @RequestParam(name = "id") Integer courseId){
@@ -149,5 +154,29 @@ public class CourseController {
         model.put("courseid",courseid);
         return new ModelAndView("addpart",model);
     }
+
+    @RequestMapping(value = "/search",method = RequestMethod.GET)
+    public String search(String type,String keyword ,Model model){
+
+        if(type.equals("category")){
+            List<Course> coursesByCategory = coursService.getCoursesByCategory(keyword);
+            model.addAttribute("Courses",coursesByCategory);
+
+
+        }if(type.equals("keyword")){
+            List<Course> coursesByKeyWord = coursService.getCoursesByKeyWord(keyword);
+            model.addAttribute("Courses",coursesByKeyWord);
+        }  if(type.equals("prof")){
+            List<Course> coursesByKeyWord = coursService.getCoursesByInstructor(keyword);
+            model.addAttribute("Courses",coursesByKeyWord);
+        }
+
+
+        model.addAttribute("profs",instructorDAO.findAll());
+        List<Category> categories = iCategoryDAO.findAll();
+        model.addAttribute("categorie",categories);
+        return "allcourses";
+    }
+
 
 }

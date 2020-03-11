@@ -7,19 +7,19 @@
 <div th:replace="layout :: nav"></div>
 <div th:replace="layout :: flash"></div>
 <section class="section  grey lighten-4">
-    <div class="container1">
+    <div class="container">
         <div class="row">
-            <div class="col s9 m9 l9 ">
-
+            <div class="col s12">
+                <div class="card" >
                     <div class="card-content">
-
+                        <span class="card-title">courses</span>
                     <div class="row">
                         <div class="col s12 m6" th:each="c:${Courses}">
                             <div class="card sticky-action">
                                 <div class="card-image">
                                     <div class="card-image waves-effect waves-block waves-light">
-                                        <a href="#" class="center-align btn-floating btn-large price waves-effect waves-light " th:inline="text">[[${c.price}]]$</a>
-                                        <img th:src="@{getPhoto(id=${c.id})}">
+
+                                        <img th:src="@{//localhost:8081/courses/getPhoto(id=${c.id})}">
                                     </div>
                                     <h2 class="card-title black-text"  th:text="${c.title}">Card Title</h2>
                                 </div>
@@ -28,8 +28,7 @@
                                     </li>
                                     <li><a class="btn-floating waves-effect waves-light red accent-2"><i class="material-icons like">favorite_border</i></a>
                                     </li>
-                                    <li><a id="buy" class="btn-floating waves-effect waves-light blue"><i class="material-icons buy">add_shopping_cart</i></a>
-                                    </li>
+
                                 </ul>
                                 <div class="card-content">
                                     <span class="card-title activator grey-text text-darken-4" th:inline="text" >
@@ -40,7 +39,7 @@
                                 </div>
                                 <div class="card-action">
 
-                                    <a sec:authorize="hasAuthority('student') " th:href="@{/student/achter(courseId=${c.id})}"  class="btn red">Acheter</a>
+                                    <a sec:authorize="hasAuthority('student') " th:href="@{/student/studentCoursDetails(courseId=${c.id})}"  class="btn red">accéder au cours</a>
                                 </div>
                                 <div class="card-reveal">
                                     <span class="card-title grey-text text-darken-4" th:inline="text" >
@@ -84,60 +83,9 @@
                             </li>
                         </ul>
                     </div>
-
+                </div>
             </div>
         </div>
-            <div class=" col s3 m3 l3">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title">Search</span>
-                        <form method="get" th:action="@{/courses/search(type='keyword')}">
-                            <div class="input-field">
-                                <input name="keyword" type="text" placeholder="chercher un cours">
-                                <input name="type" type="hidden" th:value="keyword">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-
-
-                <div>
-
-                    <h5 class="center-align">les Professeurs</h5>
-                    <ul class="collection">
-                        <li class="collection-item avatar" th:each="ins:${profs}">
-                            <img  src="../static/img/prof.png"  th:src="@{/img/prof.png}" alt="" class="circle">
-                            <a th:inline="text" th:href="@{/courses/search(type='prof',keyword=${ins.username})}">
-                                [[${ins.firstname }]]
-                                [[${ins.lastname }]]
-                            </a>
-                            <p th:text="${ins.speciality}">First Line <br>
-                                Second Line
-                            </p>
-                            <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h5 class="center-align">les categories</h5>
-
-                <ul class="collection ">
-                    <li class="collection-item avatar" th:each="cat:${categorie}">
-                        <img  src="../static/img/category_img.png"  th:src="@{/img/category_img.png}" alt="" class="circle">
-                       <a th:href="@{/courses/search(type='category',keyword=${cat.categoryName})}" th:text="${cat.CategoryName}"> </a>
-                    </li>
-
-                </ul>
-                </div>
-
-
-                <div>
-
-
-                </div>
-            </div>
     </div>
     </div>
 </section>
@@ -145,7 +93,12 @@
 
 
 
-
+<!-- Fixed Action Button -->
+<div class="fixed-action-btn">
+    <a href="#search-modal" class="modal-trigger btn-floating btn-large red">
+        <i class="material-icons">search</i>
+    </a>
+</div>
 
 <!-- serach Modal -->
 <div id="search-modal" class="modal">
