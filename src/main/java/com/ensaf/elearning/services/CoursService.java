@@ -6,6 +6,9 @@ import com.ensaf.elearning.persistence.repositories.ICourseDAO;
 import com.ensaf.elearning.persistence.repositories.IPersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -56,10 +59,16 @@ public class CoursService {
 
         return  new ArrayList<>();
     }
-    public List<Course> getActiveCourses(){
+    public Page<Course> getActiveCourses(PageRequest pageRequest){
 
-
-        return courseDAO.findCourseByApproved();
+                ArrayList approvedCourses = new ArrayList();
+        Page<Course> course = courseDAO.findCourse(pageRequest);
+        for(Course c : course.getContent() ){
+            if(c.isApproved){
+                approvedCourses.add(c);
+            }
+        }
+        return new PageImpl<>(approvedCourses);
     }
     public void AddCourse(Course course, MultipartFile file){
         if(!(file.isEmpty())){course.imagePath=file.getOriginalFilename();}
@@ -155,4 +164,24 @@ public class CoursService {
         return courseDAO.findCourseByInstructor((Instructor) personByUsername);
 
     }
+
+    public List<Course> getNotApprovedCourses() {
+        ArrayList approvedCourses = new ArrayList();
+        List<Course> course = courseDAO.findCourse();
+        for(Course c : course ){
+            if(!c.isApproved){
+                approvedCourses.add(c);
+            }
+        }
+        return approvedCourses;
+  }
+
+  public void acceptCourse(int id){
+      Optional<Course> byId = courseDAO.findById(id);
+      if(byId.isPresent()){
+          byId.get().isApproved=true;
+          courseDAO.save(byId.get());
+      }
+  }
+
 }

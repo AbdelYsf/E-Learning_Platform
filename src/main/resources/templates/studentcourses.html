@@ -61,20 +61,9 @@
                                     <i class="material-icons">chevron_left</i>
                                 </a>
                             </li>
-                            <li class="active blue lighten-2">
-                                <a href="#!" class="white-text">1</a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#!" class="blue-text">2</a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#!" class="blue-text">3</a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#!" class="blue-text">4</a>
-                            </li>
-                            <li class="waves-effect">
-                                <a href="#!" class="blue-text">5</a>
+                            <li class="blue lighten-2" th:each="page,status:${pages}">
+                                <a th:class="${status.index == currentPage ? 'active' :''}"
+                                   th:href="@{/courses/home(page=${status.index})}" class="white-text" th:text="${status.index+1}">1</a>
                             </li>
                             <li class="waves-effect">
                                 <a href="#!" class="blue-text">

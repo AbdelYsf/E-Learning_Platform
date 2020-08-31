@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:replace="layout :: head('explore')"></head>
+
+<body class="grey lighten-4">
+<div th:replace="layout :: nav"></div>
+<div th:replace="layout :: flash"></div>
+<section class="section ">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m8 offset-m2 l8 offset-l2">
+                <div class="card-panel login blue-text center">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Courses List</span>
+                            <table class="striped">
+                                <thead>
+                                <tr>
+                                    <th>titre</th>
+                                    <th>categorie</th>
+                                    <th>Prix</th>
+                                    <th>professeur</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="c:${courses}">
+                                    <td th:text="${c.title}">Post One</td>
+                                    <td th:text="${c.category.CategoryName}">Web Development</td>
+                                    <td th:text="${c.Price}">Web Development</td>
+                                    <td th:text="${c.instructor.firstname}">Web Development</td>
+                                    <td>
+                                        <a th:href="@{/courses/coursDetails(id=${c.id})}" href="details.html" class="btn blue lighten-2">Détail</a>
+                                    </td>
+                                    <td>
+                                        <a th:href="@{/admin/accept(id=${c.id})}"  href="details.html" class="btn blue lighten-2">Accepter</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+
+<div th:replace="layout :: footer"></div>
+
+
+<!-- Preloader -->
+<div th:replace="layout :: preload"></div>
+
+<div th:replace="layout :: scripts"></div>
+<script>
+    $(document).ready(function(){
+        $('select').formSelect();
+    });
+</script>
+</body>
+
+</html>

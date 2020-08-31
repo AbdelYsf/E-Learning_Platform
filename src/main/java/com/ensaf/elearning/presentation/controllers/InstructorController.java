@@ -6,10 +6,13 @@ import com.ensaf.elearning.persistence.repositories.InstructorDAO;
 import com.ensaf.elearning.services.CoursService;
 import com.ensaf.elearning.services.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,19 +24,19 @@ public class InstructorController {
 
     @Autowired
     private  CoursService coursService;
+
     @RequestMapping(value = "/own-courses")
-    public String allCourses(Model model){
+    public String allCourses(Model model ){
         List<Course> crs=coursService.getCoursesOfPrincipal();
         model.addAttribute("Courses",crs);
+        model.addAttribute("PageCourses",crs);
+        model.addAttribute("pages",new int[1]);
+        model.addAttribute("currentPage",0);
         return "own-courses";
     }
 
-
-
-
     @RequestMapping(value = "/Index")
     public String Index(){
-
         return "instructors";
     }
 

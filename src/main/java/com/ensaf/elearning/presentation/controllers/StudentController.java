@@ -10,6 +10,8 @@ import com.ensaf.elearning.services.CoursService;
 import com.ensaf.elearning.services.SectionsService;
 import com.ensaf.elearning.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +39,7 @@ public class StudentController {
         return "StudentRegister";
     }
 
-    @RequestMapping(value = "/saveStudent",method = RequestMethod.POST)
+    @RequestMapping(value = "/SaveStudent",method = RequestMethod.POST)
     public String Save(Student Std){
         studentService.addStudent(Std);
         return "redirect:/student/register";
@@ -53,6 +55,9 @@ public class StudentController {
     public String myCourses(Model model){
         List<Course> crs=coursService.getStudentCourses();
         model.addAttribute("Courses",crs);
+        model.addAttribute("PageCourses",crs);
+        model.addAttribute("pages",new int[1]);
+        model.addAttribute("currentPage",0);
         return "studentcourses";
     }
 

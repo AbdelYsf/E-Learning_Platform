@@ -38,6 +38,9 @@
                         <li sec:authorize="hasAuthority('instructor')">
                             <a href="/instructor/dashbord">Dashbord</a>
                         </li>
+                    <li sec:authorize="hasAuthority('admin')">
+                        <a href="/admin/courses-to-approve">admin</a>
+                    </li>
                     <li>
                         <a href="#">mon Profile</a>
                     </li>

@@ -14,6 +14,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,7 +57,6 @@ public class CourseController {
 
     @RequestMapping(value = "/addCategorie",method = RequestMethod.POST)
     public String AddCategorie(Category category){
-
         CoursService.AddCategorie(category);
         return "redirect:/courses/create";
     }
@@ -65,12 +67,14 @@ public class CourseController {
         model.addAttribute("category",new Category());
         return "CreateCourse";
     }
+
+
     //getCategories
 
     @RequestMapping(value = "/AddCourse",method = RequestMethod.POST)
     public String Add(Course course, @RequestParam(name = "picture")MultipartFile file){
         CoursService.AddCourse(course,file);
-        return "redirect:/courses/index";
+        return "redirect:/courses/home";
     }
 
     @RequestMapping(value = "/getPhoto",produces={MediaType.IMAGE_JPEG_VALUE})
@@ -81,15 +85,18 @@ public class CourseController {
 
     }
     @GetMapping("/home")
-    public String home(Model model){
-        List<Course> crs=coursService.getActiveCourses();
-        model.addAttribute("Courses",crs);
+    public String home(Model model,
+                       @RequestParam(name = "page",defaultValue = "0") int page,
+                       @RequestParam(name = "size",defaultValue = "4")  int size ){
+        Page<Course> crs=coursService.getActiveCourses(PageRequest.of(page,size));
+        model.addAttribute("PageCourses",crs);
+        model.addAttribute("pages",new int[crs.getTotalPages()]);
+        model.addAttribute("currentPage",page);
         List<Category> categories = iCategoryDAO.findAll();
         model.addAttribute("categorie",categories);
         model.addAttribute("profs",instructorDAO.findAll());
         return "allcourses";
     }
-
     @RequestMapping(value = "/coursDetails",method = RequestMethod.GET)
     public ModelAndView coursDetails(@RequestParam int id){
         String viewName = "courseDetails";
@@ -103,7 +110,6 @@ public class CourseController {
             model.put("cours",c);
             model.put("Sections",sections);
             model.put("newsection",new Section());
-
             modelAndView = new ModelAndView(viewName,model);
         }
         else{
@@ -136,6 +142,7 @@ public class CourseController {
 
     }
 
+
     @RequestMapping(value = "/getFile",produces={MediaType.APPLICATION_PDF_VALUE})
     @ResponseBody
     public byte[] getFile(int id) throws Exception{
@@ -156,24 +163,26 @@ public class CourseController {
     }
 
     @RequestMapping(value = "/search",method = RequestMethod.GET)
-    public String search(String type,String keyword ,Model model){
+    public String search(String type,String keyword ,Model model,
+                         @RequestParam(name = "page",defaultValue = "0") int page,
+                         @RequestParam(name = "size",defaultValue = "1")  int size){
 
+        List<Course> pageCourses=null;
         if(type.equals("category")){
-            List<Course> coursesByCategory = coursService.getCoursesByCategory(keyword);
-            model.addAttribute("Courses",coursesByCategory);
-
-
+             pageCourses = coursService.getCoursesByCategory(keyword );
+            model.addAttribute("PageCourses",new PageImpl<>(pageCourses));
         }if(type.equals("keyword")){
-            List<Course> coursesByKeyWord = coursService.getCoursesByKeyWord(keyword);
-            model.addAttribute("Courses",coursesByKeyWord);
+            pageCourses= coursService.getCoursesByKeyWord(keyword);
+            model.addAttribute("PageCourses",new PageImpl<>(pageCourses));
         }  if(type.equals("prof")){
-            List<Course> coursesByKeyWord = coursService.getCoursesByInstructor(keyword);
-            model.addAttribute("Courses",coursesByKeyWord);
+            pageCourses = coursService.getCoursesByInstructor(keyword);
+            model.addAttribute("PageCourses",new PageImpl<>(pageCourses));
         }
-
 
         model.addAttribute("profs",instructorDAO.findAll());
         List<Category> categories = iCategoryDAO.findAll();
+        model.addAttribute("pages",new int[1]);
+        model.addAttribute("currentPage",page);
         model.addAttribute("categorie",categories);
         return "allcourses";
     }
